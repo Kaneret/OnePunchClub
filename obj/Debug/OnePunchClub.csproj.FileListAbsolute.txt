@@ -1,0 +1,2 @@
+C:\Users\Олег\Documents\Visual Studio 2015\Projects\OnePunchClub\OnePunchClub\bin\Debug\OnePunchClub.exe.config
+C:\Users\Олег\Documents\Visual Studio 2015\Projects\OnePunchClub\OnePunchClub\obj\Debug\OnePunchClub.csprojResolveAssemblyReference.cache
