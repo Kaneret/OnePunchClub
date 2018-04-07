@@ -22,24 +22,39 @@ namespace OnePunchClub
         public bool Block { get { return true; } }
         public bool Evade { get { return false; } }
 
-        /// <summary>
-        /// для использования персонажем
-        /// </summary>
-        /// <param name="hero"></param>
-        /// <param name="opponent"></param>
-        public void Execute(MainHero hero, FightBot opponent)
-        {
+        public bool Activate { get; set; }
 
+        public CommonBlock()
+        {
+            Activate = true;
         }
 
-        /// <summary>
-        /// для использования ботом
-        /// </summary>
-        /// <param name="opponent"></param>
-        /// <param name="hero"></param>
-        public void Execute(FightBot opponent, MainHero hero)
+        public int Execute(MainHero hero)
         {
+            hero.fightEnergy.DecreaseQuanity((int)10);
+            var rnd = new Random();
+            if (rnd.NextDouble() < hero.precision)
+            {
+                return hero.power.value + hero.stamina.value + 5;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
+        public int Execute(FightBot opponent)
+        {
+            opponent.energy.DecreaseQuanity((int)10);            
+            var rnd = new Random();
+            if (rnd.NextDouble() < opponent.precision)
+            {
+                return opponent.power.value + opponent.stamina.value + 5;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

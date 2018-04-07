@@ -48,5 +48,7 @@ namespace OnePunchClub
         public int GetQuanity() => this.quanity;
 
         public void SetQuanity(int kol) { this.quanity = kol; }
+
+        public void SetQuanityMaximum() { this.quanity = this.maximum; }
     }
 }

@@ -13,7 +13,8 @@ namespace OnePunchClub
         bool Attack { get; }
         bool Block { get; }
         bool Evade { get; }//уворот
-        void Execute(MainHero hero, FightBot opponent);
-        void Execute(FightBot opponent, MainHero hero);
+        bool Activate { get; set; }
+        int Execute(MainHero hero);
+        int Execute(FightBot opponent);
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnePunchClub
 {
-    class CommonPunch : ISkill
+    class CommonEvade : ISkill
     {
-        public string Name { get { return "Удар кулаком"; } }
+        public string Name { get { return "Обычный уворот"; } }
 
         public string Description
         {
@@ -18,13 +18,13 @@ namespace OnePunchClub
             }
         }
 
-        public bool Attack { get { return true; } }
+        public bool Attack { get { return false; } }
         public bool Block { get { return false; } }
-        public bool Evade { get { return false; } }
+        public bool Evade { get { return true; } }
 
         public bool Activate { get; set; }
 
-        public CommonPunch()
+        public CommonEvade()
         {
             Activate = true;
         }
@@ -33,23 +33,23 @@ namespace OnePunchClub
         {
             hero.fightEnergy.DecreaseQuanity((int)10);
             var rnd = new Random();
-            if (rnd.NextDouble() < hero.precision)
+            if (rnd.NextDouble() < (hero.dexterity.value/10))
             {
-                return (hero.power.value * 2) + 10;
+                return 1;
             }
             else
             {
                 return 0;
-            }            
+            }
         }
 
         public int Execute(FightBot opponent)
         {
             opponent.energy.DecreaseQuanity((int)10);
             var rnd = new Random();
-            if (rnd.NextDouble() < opponent.precision)
+            if (rnd.NextDouble() < (opponent.dexterity.value / 10))
             {
-                return (opponent.power.value * 2) + 10;
+                return 1;
             }
             else
             {
