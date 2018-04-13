@@ -6,33 +6,20 @@ using System.Threading.Tasks;
 
 namespace OnePunchClub
 {
-    class Program
+    public class Fight
     {
-        //static readonly Random rnd = new Random();
+        static Random rnd = new Random();
 
-        static void Main(string[] args)
+
+        static void Clash(MainHero hero, FightBot opponent)
         {
-            var hero = new MainHero();
-            var opponent = new FightBot();
-
-            hero.activeFightSkills.Add(new CommonPunch());
-            hero.activeFightSkills.Add(new CommonBlock());
-
-            opponent.activeFightSkills.Add(new CommonPunch());
-            opponent.activeFightSkills.Add(new CommonEvade());
-
-            Fight.Сombat(hero, opponent);
-        }
-
-        /*static void Clash(MainHero hero, FightBot opponent)
-        {
-            var chanceHero = rnd.Next(1, hero.GetQuanityAFS()) - 1;
-            if (chanceHero < 0) chanceHero = 0;
+            //rnd = new Random();
+            var chanceHero = rnd.Next(0, hero.activeFightSkills.Count);
             var heroSkill = hero.activeFightSkills[chanceHero];
             hero.usedSkill = heroSkill;
 
-            var chanceOpp = rnd.Next(1, opponent.GetQuanityAFS()) - 1;
-            if (chanceOpp < 0) chanceOpp = 0;
+            //rnd = new Random();
+            var chanceOpp = rnd.Next(0, opponent.activeFightSkills.Count);
             var oppSkill = opponent.activeFightSkills[chanceOpp];
             opponent.usedSkill = oppSkill;
 
@@ -91,19 +78,14 @@ namespace OnePunchClub
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="hero"></param>
         /// <param name="opponent"></param>
         /// <param name="winHero">счетчик побед Протагониста</param>
         /// <param name="winBot">счетчик побед Антагониста</param>
         static void Round(MainHero hero, FightBot opponent, int winHero, int winBot)
         {
-            while ((hero.fightHealth.GetQuanity() > 0) ||
-                (hero.fightEnergy.GetQuanity() > 0) ||
-                (opponent.health.GetQuanity() > 0) ||
-                (opponent.energy.GetQuanity() > 0))
+            while ((hero.fightHealth.GetQuanity() > 0) &&
+                (opponent.health.GetQuanity() > 0))
             {
                 Clash(hero, opponent);
                 DescriptionOfClash(hero, opponent);
@@ -112,12 +94,12 @@ namespace OnePunchClub
             EndOfRound(hero, opponent, winHero, winBot);
         }
 
-        static void Сombat(MainHero hero, FightBot opponent)
-        {   
+        public static void Сombat(MainHero hero, FightBot opponent)
+        {
             ///счетчики побед         
             int winHero = 0;
             int winBot = 0;
-            
+
             for (int i = 0; i < 12; i++)
             {
                 SetMaximumOfParameters(hero, opponent);
@@ -127,7 +109,7 @@ namespace OnePunchClub
             EndOfCombat(winHero, winBot);
             SetMaximumOfParameters(hero, opponent);
         }
-        
+
         /// <summary>
         /// только для прототипа
         /// </summary>
@@ -169,7 +151,7 @@ namespace OnePunchClub
         {
             Console.WriteLine("========================================================\n" +
                     "Раунд окончен. {0}\n" +
-                    "Для продолжения нажмите любую клавишу.", 
+                    "Для продолжения нажмите любую клавишу.",
                     GetWinnerOfRound(hero, opponent, winHero, winBot));
             Console.ReadKey();
         }
@@ -225,6 +207,6 @@ namespace OnePunchClub
             hero.fightEnergy.SetQuanityMaximum();
             opponent.health.SetQuanityMaximum();
             opponent.energy.SetQuanityMaximum();
-        }*/
+        }
     }
 }

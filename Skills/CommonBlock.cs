@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnePunchClub
 {
-    class CommonBlock : ISkill
+    public class CommonBlock : ISkill
     {
         public string Name { get { return "Обычный блок"; } }
 
@@ -32,29 +32,29 @@ namespace OnePunchClub
         public int Execute(MainHero hero)
         {
             hero.fightEnergy.DecreaseQuanity((int)10);
-            var rnd = new Random();
-            if (rnd.NextDouble() < hero.precision)
-            {
-                return hero.power.value + hero.stamina.value + 5;
-            }
-            else
-            {
-                return 0;
-            }
+            //var rnd = new Random();
+            //if (rnd.NextDouble() < hero.precision)
+            //{
+            return hero.power.value + hero.stamina.value + 5;
+            //}
+            //else
+            //{
+            //    return 0;
+            //}
         }
 
         public int Execute(FightBot opponent)
         {
-            opponent.energy.DecreaseQuanity((int)10);            
-            var rnd = new Random();
-            if (rnd.NextDouble() < opponent.precision)
-            {
-                return opponent.power.value + opponent.stamina.value + 5;
-            }
-            else
-            {
-                return 0;
-            }
+            opponent.energy.DecreaseQuanity((int)10);
+            //var rnd = new Random();
+            //if (rnd.NextDouble() < opponent.precision)
+            //{
+            return opponent.power.value + opponent.stamina.value + 5;
+            //}
+            //else
+            //{
+            //    return 0;
+            //}
         }
     }
 }
