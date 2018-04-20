@@ -6,60 +6,35 @@ using System.Threading.Tasks;
 
 namespace OnePunchClub
 {
-    public class MainHero
+    public class MainHero : FightBot, IFighter
     {
         public Parameter energy;
-        public Parameter health;
         public Parameter mood; //настроение
         public Parameter satiety; //сытость
 
-        public List<ISkill> activeFightSkills { get; set; }
-
-        public ISkill usedSkill;/// <summary>
-        /// используется только в прототипе
-        /// </summary>
-
-        private int quanityAFS;
-
-        public Parameter fightEnergy;
-        public Parameter fightHealth;
-        public double regenFE;
-
-        private int armor;
-        public double precision; //точность в бою
-
-        public Characteristic dexterity;//ловкость
-        public Characteristic power;//сила
-        public Characteristic stamina;//выносливость
+        public new List<ISkill> activeFightSkills { get; set; }
 
         public MainHero()
         {
-            energy = new Parameter(100);
-            health = new Parameter(100);
-            mood = new Parameter(100);
-            satiety = new Parameter(100);
+            HP = new Parameter(100);
 
             activeFightSkills = new List<ISkill>();
-            quanityAFS = 2;
-
-            fightEnergy = energy;
-            fightHealth = health;
-            regenFE = 0;
-
+            SetMaxSkills(2);
             armor = 10;
             precision = 0.5;
 
             dexterity = new Characteristic(1, 100, 0);
             power = new Characteristic(1, 100, 0);
             stamina = new Characteristic(1, 100, 0);
+
+            block = 1;
+            evasion = 0.1;
+            attack = 1;
         }
 
-        public void SetQuanityAFS(int quan) { quanityAFS = quan; }
+        public new void Damage(int damage)
+        {
 
-        public int GetQuanityAFS() => quanityAFS;
-
-        public void SetArmor(int armor) { this.armor = armor; }
-
-        public int GetArmor() => armor;
+        }
     }
 }

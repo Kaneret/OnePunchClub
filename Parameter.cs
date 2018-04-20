@@ -41,14 +41,14 @@ namespace OnePunchClub
             if (quanity < 0) quanity = 0;
         }
 
-        public int GetMaximum() => this.maximum;
+        public int GetMaximum() { return maximum; }
 
-        public void SetMaximum(int kol) { this.maximum = kol; }
+        public void SetMaximum(int kol) { maximum = kol; }
 
-        public int GetQuanity() => this.quanity;
+        public int GetQuanity() { return quanity; }
 
-        public void SetQuanity(int kol) { this.quanity = kol; }
+        public void SetQuanity(int kol) { quanity = kol; }
 
-        public void SetQuanityMaximum() { this.quanity = this.maximum; }
+        public void SetQuanityMaximum() { quanity = maximum; }
     }
 }
