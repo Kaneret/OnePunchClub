@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Fight.cs" />
     <Compile Include="IFighter.cs" />
-    <Compile Include="Skills\CommonEvade.cs" />
+    <Compile Include="Skills\CommonEvasion.cs" />
     <Compile Include="Skills\CommonBlock.cs" />
     <Compile Include="Characteristic.cs" />
     <Compile Include="Parameter.cs" />

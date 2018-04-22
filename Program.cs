@@ -12,16 +12,16 @@ namespace OnePunchClub
 
         static void Main(string[] args)
         {
-            var hero = new MainHero();
-            var opponent = new FightBot();
+            //var hero = new MainHero();
+            //var opponent = new FightBot();
 
-            hero.activeFightSkills.Add(new CommonPunch());
-            hero.activeFightSkills.Add(new CommonBlock());
+            //hero.activeFightSkills.Add(new CommonPunch());
+            //hero.activeFightSkills.Add(new CommonBlock());
 
-            opponent.activeFightSkills.Add(new CommonPunch());
-            opponent.activeFightSkills.Add(new CommonEvade());
+            //opponent.activeFightSkills.Add(new CommonPunch());
+            //opponent.activeFightSkills.Add(new CommonEvade());
 
-            Fight.Сombat(hero, opponent);
+            //Fight.Сombat(hero, opponent);
         }
 
         /*static void Clash(MainHero hero, FightBot opponent)

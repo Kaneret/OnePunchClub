@@ -10,72 +10,33 @@ namespace OnePunchClub
     {
         static Random rnd = new Random();
 
-
-        static void Clash(MainHero hero, FightBot opponent)
+        /// <summary>
+        /// вернуть void после тестов
+        /// </summary>
+        /// <param name="hero"></param>
+        /// <param name="opponent"></param>
+        /// <returns></returns>
+        static ISkill[] Clash(MainHero hero, FightBot opponent)
         {
-            //rnd = new Random();
-            var chanceHero = rnd.Next(0, hero.activeFightSkills.Count);
-            var heroSkill = hero.activeFightSkills[chanceHero];
-            hero.usedSkill = heroSkill;
+            var skillHero = hero.GetSkill();
+            skillHero.Setup(hero);
 
-            //rnd = new Random();
-            var chanceOpp = rnd.Next(0, opponent.activeFightSkills.Count);
-            var oppSkill = opponent.activeFightSkills[chanceOpp];
-            opponent.usedSkill = oppSkill;
+            var skillOpponent = opponent.GetSkill();
+            skillOpponent.Setup(opponent);
 
-            if ((oppSkill.Attack == true) && (heroSkill.Attack == true))
-            {
-                var damage = Math.Max(oppSkill.Execute(opponent) - hero.GetArmor(), 0);
-                hero.fightHealth.DecreaseQuanity(damage);
+            var damage = hero.attack + hero.power.value * 2;
+            opponent.Damage(damage);
 
-                damage = Math.Max(heroSkill.Execute(hero) - opponent.GetArmor(), 0);
-                opponent.health.DecreaseQuanity(damage);
-            }
+            damage = opponent.attack + opponent.power.value * 2;
+            hero.Damage(damage);
 
-            if ((oppSkill.Attack == true) && (heroSkill.Block == true))
-            {
-                var damage = Math.Max(
-                    oppSkill.Execute(opponent) -
-                    (hero.GetArmor() + heroSkill.Execute(hero))
-                    , 0);
-                hero.fightHealth.DecreaseQuanity(damage);
-            }
+            skillHero.Teardown(hero);
 
-            if ((oppSkill.Block == true) && (heroSkill.Attack == true))
-            {
-                var damage = Math.Max(
-                    heroSkill.Execute(hero) -
-                    (opponent.GetArmor() + oppSkill.Execute(opponent))
-                    , 0);
-                opponent.health.DecreaseQuanity(damage);
-            }
+            skillOpponent.Teardown(opponent);
 
-            if ((oppSkill.Attack == true) && (heroSkill.Evade == true))
-            {
-                if (heroSkill.Execute(hero) == 0)
-                {
-                    var damage = Math.Max(oppSkill.Execute(opponent) - hero.GetArmor(), 0);
-                    hero.fightHealth.DecreaseQuanity(damage);
-                }
-                else heroSkill.Execute(hero);
-            }
+            ISkill[] array = { skillHero, skillOpponent };///убрать массив после тестов
 
-            if ((oppSkill.Evade == true) && (heroSkill.Attack == true))
-            {
-                if (oppSkill.Execute(opponent) == 0)
-                {
-                    var damage = Math.Max(heroSkill.Execute(hero) - opponent.GetArmor(), 0);
-                    opponent.health.DecreaseQuanity(damage);
-                }
-                else oppSkill.Execute(opponent);
-            }
-
-            if (((oppSkill.Block == true) || (oppSkill.Evade == true))
-                && ((heroSkill.Block == true) || (heroSkill.Evade == true)))
-            {
-                heroSkill.Execute(hero);
-                oppSkill.Execute(opponent);
-            }
+            return array;///убрать после тестов
         }
 
         /// <param name="hero"></param>
@@ -84,11 +45,11 @@ namespace OnePunchClub
         /// <param name="winBot">счетчик побед Антагониста</param>
         static void Round(MainHero hero, FightBot opponent, int winHero, int winBot)
         {
-            while ((hero.fightHealth.GetQuanity() > 0) &&
-                (opponent.health.GetQuanity() > 0))
+            while ((hero.HP.GetQuanity() > 0) &&
+                (opponent.HP.GetQuanity() > 0))
             {
-                Clash(hero, opponent);
-                DescriptionOfClash(hero, opponent);
+                var skillsUsed = Clash(hero, opponent);///убрать массив после тестов
+                DescriptionOfClash(hero, opponent, skillsUsed);///
             }
 
             EndOfRound(hero, opponent, winHero, winBot);
@@ -115,20 +76,20 @@ namespace OnePunchClub
         /// </summary>
         /// <param name="hero"></param>
         /// <param name="opponent"></param>
-        static void DescriptionOfClash(MainHero hero, FightBot opponent)
+        static void DescriptionOfClash(MainHero hero, FightBot opponent, ISkill[] skillsUsed)
         {
             Console.WriteLine("========================================================\n" +
                                   "Протагонист: здоровье = {0}, энергия = {1}\n" +
                                   "Используемый навык: {2}",
-                                  hero.fightHealth.GetQuanity(),
-                                  hero.fightEnergy.GetQuanity(),
-                                  hero.usedSkill.Name);
+                                  hero.HP.GetQuanity(),
+                                  hero.HP.GetQuanity(),
+                                  skillsUsed[0].Name);
             Console.WriteLine("--------------------------------------------------------\n" +
                               "Антагонист: здоровье = {0}, энергия = {1}\n" +
                               "Используемый навык: {2}",
-                              opponent.health.GetQuanity(),
-                              opponent.energy.GetQuanity(),
-                              opponent.usedSkill.Name);
+                              opponent.HP.GetQuanity(),
+                              opponent.HP.GetQuanity(),
+                              skillsUsed[1].Name);
         }
 
         /// <summary>
@@ -153,7 +114,7 @@ namespace OnePunchClub
                     "Раунд окончен. {0}\n" +
                     "Для продолжения нажмите любую клавишу.",
                     GetWinnerOfRound(hero, opponent, winHero, winBot));
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
         /// <summary>
@@ -166,22 +127,22 @@ namespace OnePunchClub
         /// <returns></returns>
         static string GetWinnerOfRound(MainHero hero, FightBot opponent, int winHero, int winBot)
         {
-            if (hero.fightHealth.GetQuanity() > opponent.health.GetQuanity())
+            if (hero.HP.GetQuanity() > opponent.HP.GetQuanity())
             {
                 winHero++; return "Победил Протагонист.";
             }
-            else if (hero.fightHealth.GetQuanity() < opponent.health.GetQuanity())
+            else if (hero.HP.GetQuanity() < opponent.HP.GetQuanity())
             {
                 winBot++; return "Победил Антагонист.";
             }
-            else if (hero.fightEnergy.GetQuanity() > opponent.energy.GetQuanity())
-            {
-                winHero++; return "Победил Протагонист.";
-            }
-            else if (hero.fightEnergy.GetQuanity() < opponent.energy.GetQuanity())
-            {
-                winBot++; return "Победил Антагонист.";
-            }
+            //else if (hero.fightEnergy.GetQuanity() > opponent.energy.GetQuanity())
+            //{
+            //    winHero++; return "Победил Протагонист.";
+            //}
+            //else if (hero.fightEnergy.GetQuanity() < opponent.energy.GetQuanity())
+            //{
+            //    winBot++; return "Победил Антагонист.";
+            //}
             else return "Ничья.";
         }
 
@@ -198,15 +159,15 @@ namespace OnePunchClub
                 Console.WriteLine("Победитель боя - Антагонист!");
             else Console.WriteLine("В бою победителя нет! Ничья по очкам!");
             Console.WriteLine("Для продолжения нажмите любую клавишу.");
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
         static void SetMaximumOfParameters(MainHero hero, FightBot opponent)
         {
-            hero.fightHealth.SetQuanityMaximum();
-            hero.fightEnergy.SetQuanityMaximum();
-            opponent.health.SetQuanityMaximum();
-            opponent.energy.SetQuanityMaximum();
+            hero.HP.SetQuanityMaximum();
+            hero.HP.SetQuanityMaximum();
+            //opponent.health.SetQuanityMaximum();
+            //opponent.energy.SetQuanityMaximum();
         }
     }
 }

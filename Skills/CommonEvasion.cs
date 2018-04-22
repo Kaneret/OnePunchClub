@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace OnePunchClub
 {
-    public class CommonBlock : ISkill
+    public class CommonEvasion : ISkill
     {
         public string Name { get; }
 
         public string Description { get; }
 
-        public CommonBlock()
+        public CommonEvasion()
         {
-            Name = "Обычный блок";
+            Name = "Обычное уклонение";
             Description = "Описание";
         }
 
         public void Setup(IFighter me)
         {
-            me.block += 4;
+            me.evasion += 4;
         }
 
         public void Teardown(IFighter me)
         {
-            me.block -= 4;
+            me.evasion -= 4;
         }
     }
 }

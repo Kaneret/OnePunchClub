@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace OnePunchClub
 {
-    public class FightBot
+    public class FightBot : IFighter
     {
         public Parameter HP;
         public int armor;
-        public double precision;
 
-        public int block;
-        public double evasion;
-        public int attack;
+        public int block { get; set; }
+        public int evasion { get; set; }
+        public int attack { get; set; }
 
         public List<ISkill> activeFightSkills { get; set; }
         private int maxQuanityAFS;
+        public ISkill usedSkill;
 
         public Characteristic dexterity;
         public Characteristic power;
@@ -32,14 +32,13 @@ namespace OnePunchClub
             activeFightSkills = new List<ISkill>();
             maxQuanityAFS = 2;
             armor = 10;
-            precision = 0.5;
 
             dexterity = new Characteristic(1, 100, 0);
             power = new Characteristic(1, 100, 0);
             stamina = new Characteristic(1, 100, 0);
 
             block = 1;
-            evasion = 0.1;
+            evasion = 1;
             attack = 1;
         }
 
@@ -53,12 +52,21 @@ namespace OnePunchClub
 
         public ISkill GetSkill()
         {
-            return activeFightSkills[rnd.Next(0, activeFightSkills.Count)];
+            var chanceHero = rnd.Next(0, activeFightSkills.Count);
+            var heroSkill = activeFightSkills[chanceHero];
+            //usedSkill = heroSkill;
+
+            return heroSkill;
         }
 
         public void Damage(int damage)
         {
-
+            if (rnd.NextDouble() > (evasion + dexterity.value) / 20)
+            {
+                var dam = damage - (block + stamina.value + armor);
+                if (dam < 0) dam = 0;
+                HP.DecreaseQuanity(dam);
+            }
         }
     }
 }

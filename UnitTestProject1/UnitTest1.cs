@@ -27,6 +27,10 @@ namespace UnitTestProject1
             opponent.activeFightSkills.Add(new CommonPunch());
 
             Fight.Сombat(hero, opponent);
+
+            //opponent.HP.DecreaseQuanity(10);
+            //hero.HP.DecreaseQuanity(10);
+            //Console.Write(hero.HP.GetQuanity());
         }
 
         [TestMethod]
@@ -39,7 +43,7 @@ namespace UnitTestProject1
             hero.activeFightSkills.Add(new CommonBlock());
 
             opponent.activeFightSkills.Add(new CommonPunch());
-            opponent.activeFightSkills.Add(new CommonEvade());
+            opponent.activeFightSkills.Add(new CommonEvasion());
 
             Fight.Сombat(hero, opponent);
         }

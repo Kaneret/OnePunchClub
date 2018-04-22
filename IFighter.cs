@@ -8,6 +8,10 @@ namespace OnePunchClub
 {
     public interface IFighter
     {
+        int block { get; set; }
+        int evasion { get; set; }
+        int attack { get; set; }
+
         ISkill GetSkill();
         void Damage(int damage);
     }
