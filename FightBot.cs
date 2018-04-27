@@ -27,11 +27,11 @@ namespace OnePunchClub
 
         public FightBot()
         {
-            HP = new Parameter(100);
+            HP = new Parameter(20);
 
             activeFightSkills = new List<ISkill>();
             maxQuanityAFS = 2;
-            armor = 10;
+            armor = 3;
 
             dexterity = new Characteristic(1, 100, 0);
             power = new Characteristic(1, 100, 0);
@@ -61,7 +61,7 @@ namespace OnePunchClub
 
         public void Damage(int damage)
         {
-            if (rnd.NextDouble() > (evasion + dexterity.value) / 20)
+            if (rnd.NextDouble() > (evasion + dexterity.value) / 40)
             {
                 var dam = damage - (block + stamina.value + armor);
                 if (dam < 0) dam = 0;

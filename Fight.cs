@@ -79,15 +79,13 @@ namespace OnePunchClub
         static void DescriptionOfClash(MainHero hero, FightBot opponent, ISkill[] skillsUsed)
         {
             Console.WriteLine("========================================================\n" +
-                                  "Протагонист: здоровье = {0}, энергия = {1}\n" +
-                                  "Используемый навык: {2}",
-                                  hero.HP.GetQuanity(),
-                                  hero.HP.GetQuanity(),
-                                  skillsUsed[0].Name);
+                              "Протагонист: здоровье = {0}\n" +
+                              "Используемый навык: {1}",
+                              hero.HP.GetQuanity(),
+                              skillsUsed[0].Name);
             Console.WriteLine("--------------------------------------------------------\n" +
-                              "Антагонист: здоровье = {0}, энергия = {1}\n" +
-                              "Используемый навык: {2}",
-                              opponent.HP.GetQuanity(),
+                              "Антагонист: здоровье = {0}\n" +
+                              "Используемый навык: {1}",
                               opponent.HP.GetQuanity(),
                               skillsUsed[1].Name);
         }
@@ -114,7 +112,7 @@ namespace OnePunchClub
                     "Раунд окончен. {0}\n" +
                     "Для продолжения нажмите любую клавишу.",
                     GetWinnerOfRound(hero, opponent, winHero, winBot));
-            //Console.ReadKey();
+            Console.ReadKey();
         }
 
         /// <summary>
@@ -135,14 +133,6 @@ namespace OnePunchClub
             {
                 winBot++; return "Победил Антагонист.";
             }
-            //else if (hero.fightEnergy.GetQuanity() > opponent.energy.GetQuanity())
-            //{
-            //    winHero++; return "Победил Протагонист.";
-            //}
-            //else if (hero.fightEnergy.GetQuanity() < opponent.energy.GetQuanity())
-            //{
-            //    winBot++; return "Победил Антагонист.";
-            //}
             else return "Ничья.";
         }
 
@@ -157,15 +147,17 @@ namespace OnePunchClub
                 Console.WriteLine("Победитель боя - Протагонист!");
             else if (winHero < winBot)
                 Console.WriteLine("Победитель боя - Антагонист!");
-            else Console.WriteLine("В бою победителя нет! Ничья по очкам!");
+            else if (winHero == winBot)
+                Console.WriteLine("В бою победителя нет! Ничья по очкам!");
+            else Console.WriteLine("Ошибка!");
             Console.WriteLine("Для продолжения нажмите любую клавишу.");
-            //Console.ReadKey();
+            Console.ReadKey();
         }
 
         static void SetMaximumOfParameters(MainHero hero, FightBot opponent)
         {
             hero.HP.SetQuanityMaximum();
-            hero.HP.SetQuanityMaximum();
+            opponent.HP.SetQuanityMaximum();
             //opponent.health.SetQuanityMaximum();
             //opponent.energy.SetQuanityMaximum();
         }
