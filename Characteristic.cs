@@ -8,14 +8,28 @@ namespace OnePunchClub
 {
     public class Characteristic
     {
-        public Characteristic(int value, int maxBar, int quanBar)
+        public Characteristic(int value)
         {
             this.value = value;
-            bar = new Parameter(maxBar, quanBar);
+            bar = new Parameter(100, 0);
         }
 
         public int value;
+
+        /// <summary>
+        /// шкала развития характеристики
+        /// </summary>
         public Parameter bar;
-        //public int timer;
+
+        public int GetValue() { return value; }
+
+        public void SetValue(int kol) { value = kol; }
+
+        //public void IncreaseValue(int kol)
+        //{
+        //    if (kol >= 0) value += kol;
+        //    if ((kol < 0) && ((value + 1) < (-kol))) value = 1;
+        //    else if
+        //}
     }
 }

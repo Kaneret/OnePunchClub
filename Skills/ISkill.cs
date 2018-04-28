@@ -8,13 +8,11 @@ namespace OnePunchClub
 {
     public interface ISkill
     {
-        string Name { get; }
-        string Description { get; }
-        bool Attack { get; }
-        bool Block { get; }
-        bool Evade { get; }//уворот
-        bool Activate { get; set; }
-        int Execute(MainHero hero);
-        int Execute(FightBot opponent);
+        string Name { get; }/// <summary>
+        /// убрать из интерфейса послее тестов
+        /// </summary>
+        /// <param name="me"></param>
+        void Setup(IFighter me);
+        void Teardown(IFighter me);
     }
 }

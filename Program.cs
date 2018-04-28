@@ -13,18 +13,16 @@ namespace OnePunchClub
         static void Main(string[] args)
         {
             var hero = new MainHero();
-            var opponent = new FightBot();            
+            var opponent = new FightBot();
 
-            //opponent.activeFightSkills.Add(new CommonPunch());
-            //opponent.activeFightSkills.Add(new CommonEvasion());
-
-            //hero.activeFightSkills.Add(new CommonPunch());
-            //hero.activeFightSkills.Add(new CommonBlock());
-
-            //Console.WriteLine(opponent.activeFightSkills[0].Name);
-            //Console.WriteLine(opponent.activeFightSkills[1].Name);
-            //Console.WriteLine(hero.activeFightSkills[0].Name);
-            //Console.WriteLine(hero.activeFightSkills[1].Name);
+            /*opponent.activeFightSkills.Add(new CommonPunch());
+            opponent.activeFightSkills.Add(new CommonEvasion());
+            hero.activeFightSkills.Add(new CommonPunch());
+            hero.activeFightSkills.Add(new CommonBlock());
+            Console.WriteLine(opponent.activeFightSkills[0].Name);
+            Console.WriteLine(opponent.activeFightSkills[1].Name);
+            Console.WriteLine(hero.activeFightSkills[0].Name);
+            Console.WriteLine(hero.activeFightSkills[1].Name);*/
 
             hero.activeFightSkills.Add(new CommonPunch());
             hero.activeFightSkills.Add(new CommonBlock());
@@ -32,14 +30,11 @@ namespace OnePunchClub
             opponent.activeFightSkills.Add(new CommonPunch());
             opponent.activeFightSkills.Add(new CommonEvasion());
 
-            //Console.WriteLine(hero.activeFightSkills[0].Name);
-            //Console.WriteLine(hero.activeFightSkills[1].Name);
-
-            //Console.WriteLine(opponent.activeFightSkills[0].Name);
-            //Console.WriteLine(opponent.activeFightSkills[1].Name);
-
-
-            //Console.ReadKey();
+            /*Console.WriteLine(hero.activeFightSkills[0].Name);
+            Console.WriteLine(hero.activeFightSkills[1].Name);
+            Console.WriteLine(opponent.activeFightSkills[0].Name);
+            Console.WriteLine(opponent.activeFightSkills[1].Name);
+            Console.ReadKey();*/
 
             Fight.Сombat(hero, opponent);
         }

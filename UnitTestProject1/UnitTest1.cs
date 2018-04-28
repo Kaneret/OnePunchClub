@@ -7,21 +7,21 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            var hero = new MainHero();
+        //[TestMethod]
+        //public void TestMethod1()
+        //{
+        //    var hero = new MainHero();
 
-            hero.activeFightSkills.Add(new CommonPunch());
-            hero.activeFightSkills.Add(new CommonBlock());
+        //    hero.activeFightSkills.Add(new CommonPunch());
+        //    hero.activeFightSkills.Add(new CommonBlock());
 
-            bool first = false;
-            bool second = false;
+        //    bool first = false;
+        //    bool second = false;
 
-            if (hero.activeFightSkills[0] == new CommonPunch()) first = true;
-            if (hero.activeFightSkills[1] == new CommonBlock()) second = true;
+        //    if (hero.activeFightSkills[0] == new CommonPunch()) first = true;
+        //    if (hero.activeFightSkills[1] == new CommonBlock()) second = true;
 
-        }
+        //}
 
         [TestMethod]
         public void TestMethod2()

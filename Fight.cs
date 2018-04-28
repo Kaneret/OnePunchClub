@@ -63,12 +63,12 @@ namespace OnePunchClub
 
             for (int i = 0; i < 12; i++)
             {
-                SetMaximumOfParameters(hero, opponent);
+                SetMaximumFightersHP(hero, opponent);
                 BeginOfRound(i + 1);
                 Round(hero, opponent, winHero, winBot);
             }
             EndOfCombat(winHero, winBot);
-            SetMaximumOfParameters(hero, opponent);
+            SetMaximumFightersHP(hero, opponent);
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace OnePunchClub
         /// </summary>
         /// <param name="hero"></param>
         /// <param name="opponent"></param>
-        /// <param name="winHero"></param>
-        /// <param name="winBot"></param>
+        /// <param name="winHero">счетчик побед Протагониста</param>
+        /// <param name="winBot">счетчик побед Антагониста</param>
         static void EndOfRound(MainHero hero, FightBot opponent, int winHero, int winBot)
         {
             Console.WriteLine("========================================================\n" +
@@ -120,8 +120,8 @@ namespace OnePunchClub
         /// </summary>
         /// <param name="hero"></param>
         /// <param name="opponent"></param>
-        /// <param name="winHero"></param>
-        /// <param name="winBot"></param>
+        /// <param name="winHero">счетчик побед Протагониста</param>
+        /// <param name="winBot">счетчик побед Антагониста</param>
         /// <returns></returns>
         static string GetWinnerOfRound(MainHero hero, FightBot opponent, int winHero, int winBot)
         {
@@ -139,8 +139,8 @@ namespace OnePunchClub
         /// <summary>
         /// только для прототипа
         /// </summary>
-        /// <param name="winHero"></param>
-        /// <param name="winBot"></param>
+        /// <param name="winHero">счетчик побед Протагониста</param>
+        /// <param name="winBot">счетчик побед Антагониста</param>
         static void EndOfCombat(int winHero, int winBot)
         {
             if (winHero > winBot)
@@ -154,12 +154,10 @@ namespace OnePunchClub
             Console.ReadKey();
         }
 
-        static void SetMaximumOfParameters(MainHero hero, FightBot opponent)
+        static void SetMaximumFightersHP(MainHero hero, FightBot opponent)
         {
             hero.HP.SetQuanityMaximum();
             opponent.HP.SetQuanityMaximum();
-            //opponent.health.SetQuanityMaximum();
-            //opponent.energy.SetQuanityMaximum();
         }
     }
 }

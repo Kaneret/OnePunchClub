@@ -21,11 +21,11 @@ namespace OnePunchClub
 
             activeFightSkills = new List<ISkill>();
             SetMaxSkills(2);
-            armor = 3;
+            SetArmor(3);
 
-            dexterity = new Characteristic(1, 100, 0);
-            power = new Characteristic(1, 100, 0);
-            stamina = new Characteristic(1, 100, 0);
+            dexterity = new Characteristic(1);
+            power = new Characteristic(1);
+            stamina = new Characteristic(1);
 
             block = 1;
             evasion = 1;

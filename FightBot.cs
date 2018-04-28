@@ -9,7 +9,7 @@ namespace OnePunchClub
     public class FightBot : IFighter
     {
         public Parameter HP;
-        public int armor;
+        private int armor;
 
         public int block { get; set; }
         public int evasion { get; set; }
@@ -17,13 +17,13 @@ namespace OnePunchClub
 
         public List<ISkill> activeFightSkills { get; set; }
         private int maxQuanityAFS;
-        public ISkill usedSkill;
+        //public ISkill usedSkill;
 
         public Characteristic dexterity;
         public Characteristic power;
         public Characteristic stamina;
 
-        Random rnd { get { return new Random(); } }
+        private Random rnd { get { return new Random(); } }
 
         public FightBot()
         {
@@ -33,9 +33,9 @@ namespace OnePunchClub
             maxQuanityAFS = 2;
             armor = 3;
 
-            dexterity = new Characteristic(1, 100, 0);
-            power = new Characteristic(1, 100, 0);
-            stamina = new Characteristic(1, 100, 0);
+            dexterity = new Characteristic(1);
+            power = new Characteristic(1);
+            stamina = new Characteristic(1);
 
             block = 1;
             evasion = 1;
@@ -50,13 +50,17 @@ namespace OnePunchClub
 
         public int GetArmor() { return armor; }
 
+        //public int GetDexterity() { return dexterity.value; }
+
+        //public int GetPower() { return power.value; }
+
+        //public int GetStamina() { return stamina.value; }
+
         public ISkill GetSkill()
         {
-            var chanceHero = rnd.Next(0, activeFightSkills.Count);
-            var heroSkill = activeFightSkills[chanceHero];
-            //usedSkill = heroSkill;
-
-            return heroSkill;
+            var chance = rnd.Next(0, activeFightSkills.Count);
+            var usedSkill = activeFightSkills[chance];            
+            return usedSkill;
         }
 
         public void Damage(int damage)
