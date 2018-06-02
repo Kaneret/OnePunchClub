@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 537bb1c7d27066e43b0acf811e55ab64
+timeCreated: 1525454952
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ButtonPause: {instanceID: 0}
+  - ButtonBook: {instanceID: 0}
+  - ButtonHero: {instanceID: 0}
+  - ButtonMap: {fileID: 1473407180466606, guid: ee5e93ebb883fa14fbd3991c1f4ad1df,
+      type: 2}
+  - ButtonSkills: {instanceID: 0}
+  - ButtonPoints: {instanceID: 0}
+  - Map: {fileID: 1394243149631502, guid: ee5e93ebb883fa14fbd3991c1f4ad1df, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
