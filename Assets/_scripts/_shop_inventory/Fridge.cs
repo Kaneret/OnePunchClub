@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Fridge : MonoBehaviour
 {
-    public GameObject Obj;
+    public GameObject Obj;//?
 
     public GameObject Bananas;
     public GameObject Meat;

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Fight : MonoBehaviour
@@ -96,6 +95,13 @@ public class Fight : MonoBehaviour
         return fighter.Attack + fighter.Power.Value * 2;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="fighter">тот, кто наносит урон</param>
+    /// <param name="attack">изначальный параметр атаки fighter'а</param>
+    /// <param name="damage">чистый, незаблокированный урон</param>
+    /// <param name="opponent">тот, кто получает урон</param>
     static void Damage(IFighter fighter, int attack, int damage, IFighter opponent)
     {
         if (fighter.EP.Quanity == 0)

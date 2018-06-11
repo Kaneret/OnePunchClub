@@ -73,6 +73,4 @@ public class TreeofSkills : MonoBehaviour
     {
         Trees.SetActive(false);
     }
-
-
 }

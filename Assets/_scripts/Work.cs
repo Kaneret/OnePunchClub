@@ -7,11 +7,11 @@ public class Work : MonoBehaviour
     public int Payment;
     public int Period;
     public double Effect;
-    public DifWork Type;
+    public DifWork Type;//?
     public Slider slider;
     public Text PaymentTitle;
 
-    bool isWork = false;
+    private bool isWork = false;
     float WorkTime = 0;
     int loop = 1;
 
