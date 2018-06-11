@@ -10,13 +10,12 @@ public class GameTimer : MonoBehaviour
 
     public Text TextTime;
 
-    // Update is called once per frame
     void Update()
     {
         GameSeconds = GameSeconds + Time.deltaTime;
 
-        TextTime.text = "День:" + GameDays.ToString() + "\n" + "Время:" + GameMinutes.ToString() + ":" + GameSeconds.ToString();
-
+        TextTime.text = "День:" + GameDays.ToString() + "\n" + 
+            "Время:" + GameMinutes.ToString() + ":" + GameSeconds.ToString();
 
         if (GameSeconds >= 60.0f)
         {
@@ -28,7 +27,6 @@ public class GameTimer : MonoBehaviour
         {
             GameDays = GameDays + 1.0f;
             GameMinutes = 0.0f;
-
         }
     }
 }

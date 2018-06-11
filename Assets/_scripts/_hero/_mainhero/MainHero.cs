@@ -19,13 +19,16 @@ public class MainHero : FightBot, IFighter
     public int SkillPoints;
     public int Money;
 
+    /// шкалы заполненности и текстовые отображения 
+    /// параметров и характеристик
+    /// (интерфейс пользователя)
     public Slider SliderHp;
     public Slider SliderEnergy;
     public Slider SliderMood;
     public Slider SliderSatiety;
     public Text CountMoney;
     public Text CountPoints;
-    public Text CountPointsTree;
+    public Text CountPointsTree;//?
 
     public Slider SliderDexterity;
     public Slider SliderPower;

@@ -1,34 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum DifTraining { STICKTHEBAG, DANCING }
+public enum TypeTraining { STICKTHEBAG, DANCING }
 public class Training : MonoBehaviour
 { 
-   
-    public GameObject DoorToBackgroung;
-    
-    public DifTraining Element;
+    public TypeTraining Type;
+    /// <summary>
+    /// Управление анимацией
+    /// </summary>
+    public Animator AnimatorController;
 
-    public Animator _animatorController;
+    /// <summary>
+    /// Эффект, оказываемый на параметры
+    /// </summary>
+    public double EffectParam;
 
-    /*экземпляр структуры эффектов, оказываемых на характеристики*/
-    EffectParam DoChange;
-    public struct EffectParam
+    private int loop = 1;
+    private bool isTrain = false;
+    private float actualTime = 0;
+
+    private EffectCharact effect;
+    /// <summary>
+    /// Эффекты, оказываемые на характеристики
+    /// </summary>
+    private struct EffectCharact
     {
-        int EffectDexterity;
-        int EffectStamina;
-        int EffectPower;
+        /// коэффициенты, отвечающие за увеличение параметров:
+        int EffectDexterity;                              ///Эффект, оказываемый на ловкость
+        int EffectStamina;                                ///Эффект, оказываемый на выносливость
+        int EffectPower;                                  ///Эффект, оказываемый на силу
 
-        public EffectParam(int a, int b, int c)
+        public EffectCharact(int dex, int stam, int pow)
         {
-            EffectDexterity = a;
-            EffectStamina = b;
-            EffectPower = c;
+            EffectDexterity = dex;
+            EffectStamina = stam;
+            EffectPower = pow;
         }
 
-        public void ChangeParam()
+        /// <summary>
+        /// Развитие характеристик и повышение их уровня
+        /// </summary>
+        public void ChangeCharacteristics()
         {
-
+            /*заполнение шкалы развития характеристик*/
             MainHero.Me.Stamina.Bar.Quanity += EffectStamina;
             MainHero.Me.Dexterity.Bar.Quanity += EffectDexterity;
             MainHero.Me.Power.Bar.Quanity += EffectPower;
@@ -49,32 +63,31 @@ public class Training : MonoBehaviour
                 MainHero.Me.Power.Value += 1;
                 MainHero.Me.Power.Bar.Quanity = 0;
             }
-
         }
-
     }
-    public double EffectCharact;
-
-    public int loop = 1;
-    bool isTrain = false;
-    public float ActualTime;
-
+   
+    /// <summary>
+    /// Запуск тренировки и определение эффектов
+    /// </summary>
     public void StartTraining()
     {
-        _animatorController = GetComponent<Animator>();
+        AnimatorController = GetComponent<Animator>();
         isTrain = true;
         DoEffect();
     }
 
+    /// <summary>
+    /// Определяет эффект тренировки в зависимости от её типа
+    /// </summary>
     public void DoEffect()
     {
-        switch (Element)
+        switch (Type)
         {
-            case DifTraining.DANCING:
-                DoChange = new EffectParam(1, 1, 3);
+            case TypeTraining.STICKTHEBAG:
+                effect = new EffectCharact(3, 2, 0);
                 break;
-            case DifTraining.STICKTHEBAG:
-                DoChange = new EffectParam(3, 2, 0);
+            case TypeTraining.DANCING:
+                effect = new EffectCharact(1, 1, 3);
                 break;
         }
     }
@@ -85,19 +98,19 @@ public class Training : MonoBehaviour
         {
             if (MainHero.Me.Energy.Quanity > 0)
             {
-                ActualTime += Time.deltaTime;
+                actualTime += Time.deltaTime;
 
-                if (ActualTime > loop)
+                if (actualTime > loop)
                 {
                     loop++;
 
-                    /*изменение характеристик*/
-                    MainHero.Me.Mood.DecreaseQuanity(EffectCharact);
-                    MainHero.Me.Energy.DecreaseQuanity(EffectCharact);
-                    MainHero.Me.Satiety.DecreaseQuanity(EffectCharact);
-
                     /*изменение параметров*/
-                    DoChange.ChangeParam();
+                    MainHero.Me.Mood.DecreaseQuanity(EffectParam);
+                    MainHero.Me.Energy.DecreaseQuanity(EffectParam);
+                    MainHero.Me.Satiety.DecreaseQuanity(EffectParam);
+
+                    /*изменение характеристик*/
+                    effect.ChangeCharacteristics();
                 }
             }
         }
@@ -106,16 +119,19 @@ public class Training : MonoBehaviour
         {
             isTrain = false;
             loop = 1;
-            ActualTime = 0;
+            actualTime = 0;
         }
     }
 
-    /*проверка местоположения игрока*/
+    /// <summary>
+    /// Проверка местоположения игрока
+    /// </summary>
+    /// <param name="col"></param>
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")
         {
-            _animatorController.SetTrigger("Training1");
+            AnimatorController.SetTrigger("Training1");
             StartTraining();
         }
     }
@@ -124,5 +140,4 @@ public class Training : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
-
 }
