@@ -6,7 +6,7 @@ public enum LocalBranch { FIRST, SECOND, THIRD, FOURTH }
 public class ActiveSkills : MonoBehaviour
 {
     public LocalBranch Element;
-    int CheckBranch;
+    private int CheckBranch;
 
     public ISkill VarSkill { get; set; }
     public int Perk { get; set; }
@@ -15,7 +15,8 @@ public class ActiveSkills : MonoBehaviour
     public int Branch { get; set; }
     List<int> Fathers = new List<int>();
 
-    public ActiveSkills(ISkill VarSkill, int Perk, int Cost, int Check, int Branch, List<int> Fathers)
+    public ActiveSkills(ISkill VarSkill, int Perk, int Cost, 
+                        int Check, int Branch, List<int> Fathers)
     {
         this.VarSkill = VarSkill;
         this.Perk = Perk;
@@ -40,12 +41,10 @@ public class ActiveSkills : MonoBehaviour
     {
         foreach (int Father in SkillList_[index].Fathers)
         {
-            if (
-            (((MainHero.Me.SkillPoints - SkillList_[index].Cost) >= 0)
-            && (SkillList_[Father].Check == 1)
-            && (SkillList_[Father].Branch == CheckBranch)
-            && (SkillList_[index].Check != 1)
-            && (SkillList_[Father].Branch == CheckBranch)))
+            if (((MainHero.Me.SkillPoints - SkillList_[index].Cost) >= 0)
+                && (SkillList_[Father].Check == 1)
+                && (SkillList_[Father].Branch == CheckBranch)
+                && (SkillList_[index].Check != 1))
             {
                 SkillList_[index].Check = 1;
                 MainHero.Me.SkillPoints -= SkillList_[index].Cost;

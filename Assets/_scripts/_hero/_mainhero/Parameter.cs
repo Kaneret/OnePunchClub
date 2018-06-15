@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-
+﻿
 
 public class Parameter
 {
@@ -69,8 +64,7 @@ public class Parameter
             Quanity = 0;
         }
     }
-
-
+    
     public void SetQuanityMaximum()
     {
         Quanity = Maximum;

@@ -18,15 +18,13 @@ public class Fight : MonoBehaviour
     static void Clash(IFighter hero, IFighter opponent)
     {        
         var skillHero = hero.GetSkill();
-        var attackH = hero.Attack;
         skillHero.Setup(hero);
                 
         var skillOpponent = opponent.GetSkill();
-        var attackO = opponent.Attack;
         skillOpponent.Setup(opponent);
 
-        Damage(hero, attackH, CountingDamageOf(hero), opponent);
-        Damage(opponent, attackO, CountingDamageOf(opponent), hero);
+        Damage(hero, CountingDamageOf(hero), opponent);
+        Damage(opponent, CountingDamageOf(opponent), hero);
 
         skillHero.Teardown(hero);
         skillOpponent.Teardown(opponent);
@@ -86,8 +84,8 @@ public class Fight : MonoBehaviour
 
     static void CountingEPof(IFighter fighter)
     {
-        fighter.HP.Maximum = 10 * fighter.Power.Value + 10 * fighter.Dexterity.Value;
-        fighter.HP.SetQuanityMaximum();
+        fighter.EP.Maximum = 10 * fighter.Power.Value + 10 * fighter.Dexterity.Value;
+        fighter.EP.SetQuanityMaximum();
     }
 
     static int CountingDamageOf(IFighter fighter)
@@ -99,10 +97,9 @@ public class Fight : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="fighter">тот, кто наносит урон</param>
-    /// <param name="attack">изначальный параметр атаки fighter'а</param>
     /// <param name="damage">чистый, незаблокированный урон</param>
     /// <param name="opponent">тот, кто получает урон</param>
-    static void Damage(IFighter fighter, int attack, int damage, IFighter opponent)
+    static void Damage(IFighter fighter, int damage, IFighter opponent)
     {
         if (fighter.EP.Quanity == 0)
         {

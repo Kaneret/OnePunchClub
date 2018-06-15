@@ -102,21 +102,12 @@ public class Map : MonoBehaviour
         objBuild.SetActive(true);
     }
 
-    /// <summary>
-    /// Влияние на героя: 
-    /// Уменьшает кол-во денег
-    /// </summary>
     public void MovementByBus()
     {
         MainHero.Me.Money -= ByBus;
         DoMovement();
     }
 
-    /// <summary>
-    /// Влияние на героя:
-    /// Увеличивает игровое время
-    /// Уменьшает параметры (настроение, сытость, энергия)
-    /// </summary>
     public void MovementByFoot()
     {
         GameTimer.GameMinutes += ByFoot;

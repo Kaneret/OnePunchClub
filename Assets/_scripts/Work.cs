@@ -12,8 +12,8 @@ public class Work : MonoBehaviour
     public Text PaymentTitle;
 
     private bool isWork = false;
-    float WorkTime = 0;
-    int loop = 1;
+    private float WorkTime = 0;
+    private int loop = 1;
 
     public GameObject Objwork;
     public GameObject Stop;
@@ -53,7 +53,8 @@ public class Work : MonoBehaviour
 
     void Update()
     {
-        PaymentTitle.text = "Каждый раз завершая работу, ты будешь получать:\n" + Payment.ToString() + "$";
+        PaymentTitle.text = "Каждый раз завершая работу, ты будешь получать:\n" 
+                                + Payment.ToString() + "$";
 
         if (isWork == true)
         {

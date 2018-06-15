@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class MainHero : FightBot, IFighter
@@ -28,7 +23,7 @@ public class MainHero : FightBot, IFighter
     public Slider SliderSatiety;
     public Text CountMoney;
     public Text CountPoints;
-    public Text CountPointsTree;//?
+    public Text CountPointsTree;
 
     public Slider SliderDexterity;
     public Slider SliderPower;
