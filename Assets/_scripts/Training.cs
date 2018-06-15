@@ -42,12 +42,12 @@ public class Training : MonoBehaviour
         /// </summary>
         public void ChangeCharacteristics()
         {
-            /*заполнение шкалы развития характеристик*/
+            ///заполнение шкалы развития характеристик
             MainHero.Me.Stamina.Bar.Quanity += EffectStamina;
             MainHero.Me.Dexterity.Bar.Quanity += EffectDexterity;
             MainHero.Me.Power.Bar.Quanity += EffectPower;
 
-            /*увеличение уровня характеристик*/
+            ///увеличение уровня характеристик
             if (MainHero.Me.Stamina.Bar.Quanity >= 100)
             {
                 MainHero.Me.Stamina.Value += 1;
@@ -104,17 +104,17 @@ public class Training : MonoBehaviour
                 {
                     loop++;
 
-                    /*изменение параметров*/
+                    ///изменение параметров
                     MainHero.Me.Mood.DecreaseQuanity(EffectParam);
                     MainHero.Me.Energy.DecreaseQuanity(EffectParam);
                     MainHero.Me.Satiety.DecreaseQuanity(EffectParam);
 
-                    /*изменение характеристик*/
+                    ///изменение характеристик
                     effect.ChangeCharacteristics();
                 }
             }
         }
-        /*сбрасываем выполнение*/
+        ///сбрасываем выполнение
         if (Input.GetMouseButtonDown(1))
         {
             isTrain = false;

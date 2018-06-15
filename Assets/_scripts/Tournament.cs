@@ -9,7 +9,6 @@ public class Tournament : MonoBehaviour {
 
     public bool isActive = true;
 
-
     public void SwitchScrolls()
     {
         if (isActive == true)
