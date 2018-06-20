@@ -10,7 +10,7 @@ public class Characteristic
     public int Value { get; set; }
 
     /// <summary>
-    /// шкала развития характеристики
+    /// шкала развития характеристик
     /// </summary>
     public Parameter Bar;
 }
